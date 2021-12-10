@@ -1,4 +1,6 @@
-﻿# devops-netologynew line
+﻿Hello world!
+New string
+# devops-netologynew line
 # Local .terraform directories
 **/.terraform/* - будут проигнорированы все каталоги внутри данного
 
