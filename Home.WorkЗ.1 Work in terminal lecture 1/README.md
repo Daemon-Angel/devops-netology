@@ -180,6 +180,53 @@ user@Daemon:~/Документы$ rm {1..100000}.txt - удалит создан
 user@Daemon:~/Документы$ rm {1..300000}.txt - не удается создать такое количество файлов
 bash: /usr/bin/rm: Слишком длинный список аргументов
 
+11. В man bash поищите по /\[\[. Что делает конструкция [[ -d /tmp ]]
 
+-d - это оператор, проверяющий, существует ли данный каталог или нет.
 
+Пример использования в скрипте:
+
+if [[ -d /tmp ]]
+then
+    echo "каталог существует"
+else
+    echo "каталога отсутствует"
+fi
+
+12. Основываясь на знаниях о просмотре текущих (например, PATH) и установке новых переменных; командах, которые мы рассматривали, добейтесь в выводе type -a bash в виртуальной машине наличия первым пунктом в списке:
+bash is /tmp/new_path_directory/bash
+bash is /usr/local/bin/bash
+bash is /bin/bash
+(прочие строки могут отличаться содержимым и порядком)
+
+vagrant@vagrant:~$ mkdir /tmp/new_path_dir/
+
+vagrant@vagrant:~$ cp /bin/bash /tmp/new_path_dir/
+
+vagrant@vagrant:~$ type -a bash
+
+bash is /usr/bin/bash
+
+bash is /bin/bash
+
+vagrant@vagrant:~$ PATH=/tmp/new_path_dir/:$PATH
+
+vagrant@vagrant:~$ type -a bash
+
+bash is /tmp/new_path_dir/bash
+
+bash is /usr/bin/bash
+
+bash is /bin/bash
+
+13. Чем отличается планирование команд с помощью batch и at?
+
+Команда at берет дату и время ( runtime), когда вы хотите выполнить задание в качестве параметра командной строки, и команду, которая будет выполнена из стандартного ввода.
+
+batch или его псевдоним at -b, планирует задания и выполняет их в очереди пакетов, когда позволяет уровень загрузки системы. По умолчанию задания выполняются, когда средняя загрузка системы ниже 1,5. 
+
+14. Завершите работу виртуальной машины чтобы не расходовать ресурсы компьютера и/или батарею ноутбука.
+
+user@Daemon:~/.vagrant.d$ vagrant suspend 
+==> default: Saving VM state and suspending execution...
 
