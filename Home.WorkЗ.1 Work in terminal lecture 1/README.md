@@ -228,5 +228,6 @@ batch или его псевдоним at -b, планирует задания 
 14. Завершите работу виртуальной машины чтобы не расходовать ресурсы компьютера и/или батарею ноутбука.
 
 user@Daemon:~/.vagrant.d$ vagrant suspend 
+
 ==> default: Saving VM state and suspending execution...
 
