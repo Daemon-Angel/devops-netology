@@ -100,6 +100,86 @@ root@Daemon:/home/user/Загрузки# echo '' >/proc/6603/fd/1
 Зомби не занимают памяти (как процессы-сироты), но блокируют записи в таблице процессов, размер которой ограничен для каждого пользователя и системы в целом.
 Зомби-процесс существует до тех пор, пока родительский процесс не прочитает его статус с помощью системного вызова wait(), в результате чего запись в таблице процессов будет освобождена.
 
-
-
+#### 5. В iovisor BCC есть утилита `opensnoop`:
+```
+root@vagrant:~# dpkg -L bpfcc-tools | grep sbin/opensnoop
+/usr/sbin/opensnoop-bpfcc
+```
+На какие файлы вы увидели вызовы группы `open` за первую секунду работы утилиты? Воспользуйтесь пакетом `bpfcc-tools` для Ubuntu 20.04. Дополнительные [сведения по установке](https://github.com/iovisor/bcc/blob/master/INSTALL.md).
+#### Ответ:
+```
+user@Daemon:~$ sudo -i
+root@Daemon:~# dpkg -L bpfcc-tools | grep sbin/opensnoop
+/usr/sbin/opensnoop-bpfcc
+root@Daemon:~# /usr/sbin/opensnoop-bpfcc
+PID    COMM               FD ERR PATH
+3215   MemoryPoller      116   0 /proc/meminfo
+975    irqbalance          6   0 /proc/interrupts
+975    irqbalance          6   0 /proc/stat
+975    irqbalance          6   0 /proc/irq/28/smp_affinity
+975    irqbalance          6   0 /proc/irq/24/smp_affinity
+975    irqbalance          6   0 /proc/irq/29/smp_affinity
+975    irqbalance          6   0 /proc/irq/31/smp_affinity
+975    irqbalance          6   0 /proc/irq/18/smp_affinity
+975    irqbalance          6   0 /proc/irq/17/smp_affinity
+975    irqbalance          6   0 /proc/irq/26/smp_affinity
+975    irqbalance          6   0 /proc/irq/5/smp_affinity
+975    irqbalance          6   0 /proc/irq/0/smp_affinity
+975    irqbalance          6   0 /proc/irq/6/smp_affinity
+975    irqbalance          6   0 /proc/irq/8/smp_affinity
+975    irqbalance          6   0 /proc/irq/9/smp_affinity
+975    irqbalance          6   0 /proc/irq/14/smp_affinity
+975    irqbalance          6   0 /proc/irq/15/smp_affinity
+1002   thermald            9   0 /sys/class/thermal/thermal_zone0/temp
+970    NetworkManager     27   0 /etc/hosts
+1002   thermald            9   0 /sys/class/thermal/thermal_zone0/temp
+3215   MemoryPoller       56   0 /proc/meminfo
+1002   thermald            9   0 /sys/class/thermal/thermal_zone0/temp
+3215   MemoryPoller       56   0 /proc/meminfo
+975    irqbalance          6   0 /proc/interrupts
+975    irqbalance          6   0 /proc/stat
+975    irqbalance          6   0 /proc/irq/28/smp_affinity
+975    irqbalance          6   0 /proc/irq/24/smp_affinity
+975    irqbalance          6   0 /proc/irq/29/smp_affinity
+975    irqbalance          6   0 /proc/irq/31/smp_affinity
+975    irqbalance          6   0 /proc/irq/18/smp_affinity
+975    irqbalance          6   0 /proc/irq/17/smp_affinity
+975    irqbalance          6   0 /proc/irq/26/smp_affinity
+975    irqbalance          6   0 /proc/irq/5/smp_affinity
+975    irqbalance          6   0 /proc/irq/0/smp_affinity
+975    irqbalance          6   0 /proc/irq/6/smp_affinity
+975    irqbalance          6   0 /proc/irq/8/smp_affinity
+975    irqbalance          6   0 /proc/irq/9/smp_affinity
+975    irqbalance          6   0 /proc/irq/14/smp_affinity
+975    irqbalance          6   0 /proc/irq/15/smp_affinity
+319    systemd-journal    58   0 /proc/8034/comm
+319    systemd-journal    58   0 /proc/8034/cmdline
+319    systemd-journal    58   0 /proc/8034/status
+319    systemd-journal    58   0 /proc/8034/attr/current
+319    systemd-journal    58   0 /proc/8034/sessionid
+319    systemd-journal    58   0 /proc/8034/loginuid
+319    systemd-journal    58   0 /proc/8034/cgroup
+319    systemd-journal    -1   2 /run/systemd/units/log-extra-fields:packagekit.service
+319    systemd-journal    58   0 /var/log/journal/425981a116324619b737359ee6064c79
+319    systemd-journal    -1   2 /run/log/journal/425981a116324619b737359ee6064c79/system.journal
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service/cgroup.procs
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service
+1      systemd           131   0 /proc/1001/cgroup
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service/cgroup.events
+1      systemd           131   0 /proc/8034/comm
+1      systemd           131   0 /proc/8034/comm
+1      systemd           131   0 /proc/8034/cgroup
+1      systemd            -1   2 /sys/fs/cgroup/memory/system.slice/packagekit.service/memory.events
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service/cgroup.procs
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service/cgroup.procs
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service/cgroup.threads
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service
+1      systemd           131   0 /sys/fs/cgroup/unified/system.slice/packagekit.service
+1      systemd           131   0 /sys/fs/cgroup/systemd/system.slice/packagekit.service
+1      systemd           131   0 /sys/fs/cgroup/memory/system.slice/packagekit.service
+```
+#### 6. Какой системный вызов использует `uname -a`? Приведите цитату из man по этому системному вызову, где описывается альтернативное местоположение в `/proc`, где можно узнать версию ядра и релиз ОС.
+#### Ответ:
+Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version, domainname}.
 
