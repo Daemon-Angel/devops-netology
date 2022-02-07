@@ -193,6 +193,30 @@ ulimit -n	the maximum number of open file descriptors
 
 «Мягкое ограничение» — это ограничение, которое может изменяться процессами динамически,
 т. е. Во время выполнения, если процессу требуется больше открытых файлов, чем разрешено мягким пределом.
+#### 6.Запустите любой долгоживущий процесс (не `ls`, который отработает мгновенно, а, например, `sleep 1h`) в отдельном неймспейсе процессов; покажите, что ваш процесс работает под PID 1 через `nsenter`. Для простоты работайте в данном задании под root (`sudo -i`). Под обычным пользователем требуются дополнительные опции (`--map-root-user`) и т.д.
+#### Ответ: Запускаем sleep через unshare:
+```
+root@vagrant:~# ps -e | grep sleep
+root@vagrant:~# unshare -f --pid --mount-proc sleep 1h
+^Z
+[1]+  Stopped                 unshare -f --pid --mount-proc sleep 1h
+root@vagrant:~# ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root        1679  0.0  0.0   5480   520 pts/0    T    23:12   0:00 unshare -f --pid --mo
+root        1680  0.0  0.0   5476   596 pts/0    S    23:12   0:00 sleep 1h
+root        1681  0.0  0.3   8892  3432 pts/0    R+   23:13   0:00 ps aux
+```
+Заходим в процесс:
+```
+root@vagrant:~# nsenter -t 1680 -p -m
+root@vagrant:/# ps
+    PID TTY          TIME CMD
+      1 pts/0    00:00:00 sleep
+      2 pts/0    00:00:00 bash
+     13 pts/0    00:00:00 ps
+```
+
+
 
 
 
