@@ -221,6 +221,13 @@ root@vagrant:/# ps
 
 Результат dmesg:
 
+```
+root@vagrant:~# dmesg | grep fork
+[ 3807.818463] cgroup: fork rejected by pids controller in /user.slice/user-1000.slice/session-3.scope
+```
+Здесь мы можем видеть,что сработал механизм сgroups - это способ ограничить ресурсы внутри конкретной cgroup(контрольной группы процессов).
+Если установить ulimit -u 30 - число процессов будет ограниченно 30 для пользоователя. 
+
 
 
 
