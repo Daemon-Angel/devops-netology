@@ -168,6 +168,16 @@ node_network_receive_errs_total{device="lo"} 0
 После успешной перезагрузки в браузере *на своем ПК* (не в виртуальной машине) вы должны суметь зайти на `localhost:19999`. Ознакомьтесь с метриками, которые по умолчанию собираются Netdata и с комментариями, которые даны к этим метрикам.
 #### Ответ: Изначально установил Netdata на свою ПЭВМ, вместо виртуальной машины, поэтому при перезагрузке `vagrant reload`, виртуальная машина руганулась на то, что порт 19999 уже занят, поэтому поменял в конфигурационном файле Vagrant порт хоста на 9999 `config.vm.network "forwarded_port", guest: 19999, host: 9999`
 ![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Home.Work%D0%97.4%20OS%20lecture%202./Vagrant-Netdata.png)
+#### 4.Можно ли по выводу `dmesg` понять, осознает ли ОС, что загружена не на настоящем оборудовании, а на системе виртуализации?
+#### Ответ: Думаю, что по результату выполнения команды, все очевидно
+```
+vagrant@vagrant:~$ dmesg | grep -i virtual
+[    0.000000] DMI: innotek GmbH VirtualBox/VirtualBox, BIOS VirtualBox 12/01/2006
+[    0.003310] CPU MTRRs all blank - virtualized system.
+[    0.094207] Booting paravirtualized kernel on KVM
+[    3.975054] systemd[1]: Detected virtualization oracle.```
+
+
 
 
 
