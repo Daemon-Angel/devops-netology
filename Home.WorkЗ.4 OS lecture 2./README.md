@@ -159,7 +159,14 @@ node_network_receive_drop_total{device="lo"} 0
 node_network_receive_errs_total{device="enp3s0"} 0
 node_network_receive_errs_total{device="lo"} 0
 ```
+#### 3. Установите в свою виртуальную машину [Netdata](https://github.com/netdata/netdata). Воспользуйтесь [готовыми пакетами](https://packagecloud.io/netdata/netdata/install) для установки (`sudo apt install -y netdata`). После успешной установки:
+    * в конфигурационном файле `/etc/netdata/netdata.conf` в секции [web] замените значение с localhost на `bind to = 0.0.0.0`,
+    * добавьте в Vagrantfile проброс порта Netdata на свой локальный компьютер и сделайте `vagrant reload`:
 
+    config.vm.network "forwarded_port", guest: 19999, host: 19999
+
+После успешной перезагрузки в браузере *на своем ПК* (не в виртуальной машине) вы должны суметь зайти на `localhost:19999`. Ознакомьтесь с метриками, которые по умолчанию собираются Netdata и с комментариями, которые даны к этим метрикам.
+#### Ответ: Изначально установил Netdata на свою ПЭВМ, вместо виртуальной машины, поэтому при перезагрузке `vagrant reload`, виртуальная машина руганулась на то, что порт 19999 уже занят, поэтому поменял в конфигурационном файле Vagrant порт хоста на 9999 `config.vm.network "forwarded_port", guest: 19999, host: 9999`
 
 
 
