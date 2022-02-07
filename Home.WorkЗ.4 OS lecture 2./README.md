@@ -47,7 +47,119 @@ root@Daemon:~# sudo systemctl status node_exporter
 ```
 После перезагрузки результат тот же, сервис работает, всё отлично.
 #### 2.Ознакомьтесь с опциями node_exporter и выводом `/metrics` по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
-#### Ответ:
+#### Ответ: Запускаю node_exporter.service
+```
+● node_exporter.service - Prometheus Node Exporter
+     Loaded: loaded (/etc/systemd/system/node_exporter.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2022-02-07 02:35:53 MSK; 25s ago
+   Main PID: 21169 (node_exporter)
+      Tasks: 5 (limit: 14260)
+     Memory: 2.5M
+     CGroup: /system.slice/node_exporter.service
+             └─21169 /usr/local/bin/node_exporter
+
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=thermal_zone
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=time
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=timex
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=udp_queues
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=uname
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=vmstat
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=xfs
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:115 level=info collector=zfs
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=node_exporter.go:199 level=info msg="Listening on" address=:9100
+фев 07 02:35:53 Daemon node_exporter[21169]: ts=2022-02-06T23:35:53.354Z caller=tls_config.go:195 level=info msg="TLS is disabled." http2=false
+```
+Далее вхожу через браузер к примеру, на свой IP-адрес, порт 9100, указанный сервисом при запуске, с ключом - /metrics (http://192.168.0.110:9100/metrics) и наблюдаем все интересующие нас характеристики:
+
+```
+# HELP node_cpu_seconds_total Seconds the CPUs spent in each mode.
+# TYPE node_cpu_seconds_total counter
+node_cpu_seconds_total{cpu="0",mode="idle"} 7141.84
+node_cpu_seconds_total{cpu="0",mode="iowait"} 10.85
+node_cpu_seconds_total{cpu="0",mode="irq"} 0
+node_cpu_seconds_total{cpu="0",mode="nice"} 3.75
+node_cpu_seconds_total{cpu="0",mode="softirq"} 0.39
+node_cpu_seconds_total{cpu="0",mode="steal"} 0
+node_cpu_seconds_total{cpu="0",mode="system"} 995.11
+node_cpu_seconds_total{cpu="0",mode="user"} 3065.58
+node_cpu_seconds_total{cpu="1",mode="idle"} 7203.8
+node_cpu_seconds_total{cpu="1",mode="iowait"} 9.6
+node_cpu_seconds_total{cpu="1",mode="irq"} 0
+node_cpu_seconds_total{cpu="1",mode="nice"} 4.18
+node_cpu_seconds_total{cpu="1",mode="softirq"} 0.19
+node_cpu_seconds_total{cpu="1",mode="steal"} 0
+node_cpu_seconds_total{cpu="1",mode="system"} 1027.5
+node_cpu_seconds_total{cpu="1",mode="user"} 2954.45
+node_cpu_seconds_total{cpu="2",mode="idle"} 6990.7
+node_cpu_seconds_total{cpu="2",mode="iowait"} 11.16
+node_cpu_seconds_total{cpu="2",mode="irq"} 0
+node_cpu_seconds_total{cpu="2",mode="nice"} 2.5
+node_cpu_seconds_total{cpu="2",mode="softirq"} 19.41
+node_cpu_seconds_total{cpu="2",mode="steal"} 0
+node_cpu_seconds_total{cpu="2",mode="system"} 989.23
+node_cpu_seconds_total{cpu="2",mode="user"} 3194.83
+node_cpu_seconds_total{cpu="3",mode="idle"} 6869.33
+node_cpu_seconds_total{cpu="3",mode="iowait"} 15.75
+node_cpu_seconds_total{cpu="3",mode="irq"} 0
+node_cpu_seconds_total{cpu="3",mode="nice"} 2.79
+node_cpu_seconds_total{cpu="3",mode="softirq"} 29.01
+node_cpu_seconds_total{cpu="3",mode="steal"} 0
+node_cpu_seconds_total{cpu="3",mode="system"} 987.75
+node_cpu_seconds_total{cpu="3",mode="user"} 3322.57
+
+# HELP node_disk_io_time_seconds_total Total seconds spent doing I/Os.
+# TYPE node_disk_io_time_seconds_total counter
+node_disk_io_time_seconds_total{device="sda"} 0.404
+node_disk_io_time_seconds_total{device="sdb"} 0.496
+node_disk_io_time_seconds_total{device="sdc"} 123.208
+node_disk_io_time_seconds_total{device="sdd"} 0.432
+# HELP node_disk_io_time_weighted_seconds_total The weighted # of seconds spent doing I/Os.
+# TYPE node_disk_io_time_weighted_seconds_total counter
+node_disk_io_time_weighted_seconds_total{device="sda"} 0.47700000000000004
+node_disk_io_time_weighted_seconds_total{device="sdb"} 0.512
+node_disk_io_time_weighted_seconds_total{device="sdc"} 124.24900000000001
+node_disk_io_time_weighted_seconds_total{device="sdd"} 0.367
+# HELP node_disk_read_bytes_total The total number of bytes read successfully.
+# TYPE node_disk_read_bytes_total counter
+node_disk_read_bytes_total{device="sda"} 8.9984e+06
+node_disk_read_bytes_total{device="sdb"} 5.694464e+06
+node_disk_read_bytes_total{device="sdc"} 1.610171904e+09
+node_disk_read_bytes_total{device="sdd"} 5.643776e+06
+# HELP node_disk_read_time_seconds_total The total number of seconds spent by all reads.
+# TYPE node_disk_read_time_seconds_total counter
+node_disk_read_time_seconds_total{device="sda"} 0.47700000000000004
+node_disk_read_time_seconds_total{device="sdb"} 0.512
+node_disk_read_time_seconds_total{device="sdc"} 14.569
+node_disk_read_time_seconds_total{device="sdd"} 0.367
+
+# HELP node_memory_MemAvailable_bytes Memory information field MemAvailable_bytes.
+# TYPE node_memory_MemAvailable_bytes gauge
+node_memory_MemAvailable_bytes 7.587385344e+09
+# HELP node_memory_MemFree_bytes Memory information field MemFree_bytes.
+# TYPE node_memory_MemFree_bytes gauge
+node_memory_MemFree_bytes 4.543041536e+09
+# HELP node_memory_MemTotal_bytes Memory information field MemTotal_bytes.
+# TYPE node_memory_MemTotal_bytes gauge
+node_memory_MemTotal_bytes 1.2535341056e+10
+
+# HELP node_network_receive_bytes_total Network device statistic receive_bytes.
+# TYPE node_network_receive_bytes_total counter
+node_network_receive_bytes_total{device="enp3s0"} 1.301622755e+09
+node_network_receive_bytes_total{device="lo"} 1.406939e+07
+# HELP node_network_receive_compressed_total Network device statistic receive_compressed.
+# TYPE node_network_receive_compressed_total counter
+node_network_receive_compressed_total{device="enp3s0"} 0
+node_network_receive_compressed_total{device="lo"} 0
+# HELP node_network_receive_drop_total Network device statistic receive_drop.
+# TYPE node_network_receive_drop_total counter
+node_network_receive_drop_total{device="enp3s0"} 3
+node_network_receive_drop_total{device="lo"} 0
+# HELP node_network_receive_errs_total Network device statistic receive_errs.
+# TYPE node_network_receive_errs_total counter
+node_network_receive_errs_total{device="enp3s0"} 0
+node_network_receive_errs_total{device="lo"} 0
+```
+
 
 
 
