@@ -10,6 +10,14 @@
 Установил node_exporter-1.3.1; 
 Создаю небольшой скрипт (scriptforexporter), помещаю его в /usr/local/bin и делаем его исполняемым (sudo chmod +x /usr/local/bin/scriptforexporter)
 Cоздаю unit file (node_exporter.service) для нового сервиса с таким содержимым:
+
+Ответ на уточнение как именно в службу будут передаваться дополнительные опции:
+Я так понял, что необходимо использовать EnvironmentFile, а точнее создать /etc/default/node_exporter, и тогда можно добавлять переменные среды нашего бинарного файла scriptforexporter через этот файл. Например, если мы хотим отключить несколько наборов метрик или включить больше наборов метрик, мы можем управлять этим файлом.
+
+> sudo cat /etc/default/node_exporter
+
+> OPTIONS="--collector.nfs --log.level='fatal'"
+
 ```
 [Unit]
 Description=Hello World 
@@ -17,7 +25,8 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/scriptforexporter start
+EnvironmentFile=/etc/default/node_exporter
+ExecStart=/usr/local/bin/scriptforexporter start $OPTIONS
 ExecStop=/usr/local/bin/scriptforexporter stop 
 TimeoutStopSec=infinity
 
