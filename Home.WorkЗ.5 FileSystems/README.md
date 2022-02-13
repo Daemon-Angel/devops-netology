@@ -208,6 +208,37 @@ sdc                         8:32   0  2.5G  0 disk
 ```
 #### 7. Соберите `mdadm` RAID0 на второй паре маленьких разделов.
 #### Ответ:
+```
+root@vagrant:~# mdadm --create /dev/md1 --level=0 --raid-devices=2 /dev/sd[bc]2
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md1 started.
+root@vagrant:~# lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
+loop0                       7:0    0 55.4M  1 loop  /snap/core18/2128
+loop1                       7:1    0 32.3M  1 loop  /snap/snapd/12704
+loop2                       7:2    0 70.3M  1 loop  /snap/lxd/21029
+loop3                       7:3    0 55.5M  1 loop  /snap/core18/2284
+loop4                       7:4    0 43.4M  1 loop  /snap/snapd/14549
+loop5                       7:5    0 61.9M  1 loop  /snap/core20/1328
+loop6                       7:6    0 67.2M  1 loop  /snap/lxd/21835
+sda                         8:0    0   64G  0 disk  
+├─sda1                      8:1    0    1M  0 part  
+├─sda2                      8:2    0    1G  0 part  /boot
+└─sda3                      8:3    0   63G  0 part  
+  └─ubuntu--vg-ubuntu--lv 253:0    0 31.5G  0 lvm   /
+sdb                         8:16   0  2.5G  0 disk  
+├─sdb1                      8:17   0    2G  0 part  
+│ └─md0                     9:0    0    2G  0 raid1 
+└─sdb2                      8:18   0  511M  0 part  
+  └─md1                     9:1    0 1018M  0 raid0 
+sdc                         8:32   0  2.5G  0 disk  
+├─sdc1                      8:33   0    2G  0 part  
+│ └─md0                     9:0    0    2G  0 raid1 
+└─sdc2                      8:34   0  511M  0 part  
+  └─md1                     9:1    0 1018M  0 raid0
+```
+#### 8. Создайте 2 независимых PV на получившихся md-устройствах.
+#### Ответ:
 
 
 
