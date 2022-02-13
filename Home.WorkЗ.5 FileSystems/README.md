@@ -239,8 +239,39 @@ sdc                         8:32   0  2.5G  0 disk
 ```
 #### 8. Создайте 2 независимых PV на получившихся md-устройствах.
 #### Ответ:
-
-
+```
+root@vagrant:~# pvcreate /dev/md0
+  Physical volume "/dev/md0" successfully created.
+root@vagrant:~# pvcreate /dev/md1
+  Physical volume "/dev/md1" successfully created.
+root@vagrant:~# pvs
+  PV         VG        Fmt  Attr PSize    PFree   
+  /dev/md0             lvm2 ---    <2.00g   <2.00g
+  /dev/md1             lvm2 ---  1018.00m 1018.00m
+  /dev/sda3  ubuntu-vg lvm2 a--   <63.00g  <31.50g
+  ```
+#### 9. Создайте общую volume-group на этих двух PV.
+#### Ответ:
+```
+root@vagrant:~# vgcreate myvg /dev/md0 /dev/md1
+  Volume group "myvg" successfully created
+root@vagrant:~# vgs
+  VG        #PV #LV #SN Attr   VSize   VFree  
+  myvg        2   0   0 wz--n-  <2.99g  <2.99g
+  ubuntu-vg   1   1   0 wz--n- <63.00g <31.50g
+```
+#### 10. Создайте LV размером 100 Мб, указав его расположение на PV с RAID0.
+#### Ответ:
+```
+root@vagrant:~# lvcreate -L 100Mb -n mylv /dev/myvg /dev/md1
+  Logical volume "mylv" created.
+root@vagrant:~# lvs
+  LV        VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv      myvg      -wi-a----- 100.00m                                                    
+  ubuntu-lv ubuntu-vg -wi-ao----  31.50g
+```
+#### 11. Создайте `mkfs.ext4` ФС на получившемся LV.
+#### Ответ:
 
 
 
