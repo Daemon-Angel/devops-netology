@@ -272,6 +272,43 @@ root@vagrant:~# lvs
 ```
 #### 11. Создайте `mkfs.ext4` ФС на получившемся LV.
 #### Ответ:
+```
+root@vagrant:~# mkfs.ext4 /dev/myvg/mylv
+mke2fs 1.45.5 (07-Jan-2020)
+Creating filesystem with 25600 4k blocks and 25600 inodes
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (1024 blocks): done
+Writing superblocks and filesystem accounting information: done
+```
+#### 12. Смонтируйте этот раздел в любую директорию, например, `/tmp/new`.
+#### Ответ:
+```
+root@vagrant:~# mkdir /tmp/new
+root@vagrant:~# mount /dev/myvg/mylv /tmp/new
+root@vagrant:~# df -h
+Filesystem                         Size  Used Avail Use% Mounted on
+udev                               447M     0  447M   0% /dev
+tmpfs                               99M 1012K   98M   2% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv   31G  3.7G   26G  13% /
+tmpfs                              491M     0  491M   0% /dev/shm
+tmpfs                              5.0M     0  5.0M   0% /run/lock
+tmpfs                              491M     0  491M   0% /sys/fs/cgroup
+/dev/loop0                          56M   56M     0 100% /snap/core18/2128
+/dev/loop1                          33M   33M     0 100% /snap/snapd/12704
+/dev/loop2                          71M   71M     0 100% /snap/lxd/21029
+/dev/sda2                          976M  107M  803M  12% /boot
+vagrant                             42G   24G   18G  58% /vagrant
+/dev/loop3                          56M   56M     0 100% /snap/core18/2284
+/dev/loop4                          44M   44M     0 100% /snap/snapd/14549
+tmpfs                               99M     0   99M   0% /run/user/1000
+/dev/loop5                          62M   62M     0 100% /snap/core20/1328
+/dev/loop6                          68M   68M     0 100% /snap/lxd/21835
+/dev/mapper/myvg-mylv               93M   72K   86M   1% /tmp/new
+```
+#### 13. Поместите туда тестовый файл, например `wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz`.
+#### Ответ:
 
 
 
