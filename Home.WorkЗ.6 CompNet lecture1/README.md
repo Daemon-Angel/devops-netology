@@ -54,7 +54,7 @@ Connection closed by foreign host.
 - проверьте время загрузки страницы, какой запрос обрабатывался дольше всего?
 - приложите скриншот консоли браузера в ответ.
 
-Страница загрузилась за 2.45с, самый долгий запрос - фавикон, 397мс.
+Страница загрузилась за 2.45с, самый долгий запрос - stackoverflow.com, 345мс, а также несколько script за 200 мс.
 ![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Home.Work%D0%97.6%20CompNet%20lecture1/stackoverflow3-3.jpg)
 
 
