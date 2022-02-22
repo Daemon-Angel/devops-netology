@@ -130,8 +130,31 @@ HOST: Daemon                      Loss%   Snt   Last   Avg  Best  Wrst StDev
  19. AS???    ???                 100.0     1    0.0   0.0   0.0   0.0   0.0
  20. AS15169  8.8.8.8              0.0%     1   26.9  26.9  26.9  26.9   0.0
  ```
- Наибольшая задержка на 10 хопе
- 
+Наибольшая задержка на 10 хопе
+#### 7. Какие DNS сервера отвечают за доменное имя dns.google? Какие A записи? воспользуйтесь утилитой `dig`
+#### Ответ:
+ ```
+ user@Daemon:~$ dig +short NS dns.google
+ns3.zdns.google.
+ns2.zdns.google.
+ns4.zdns.google.
+ns1.zdns.google.
+```
+NS записи
+```
+user@Daemon:~$ dig +short A dns.google
+8.8.4.4
+8.8.8.8
+```
+А записи
+#### 8. Проверьте PTR записи для IP адресов из задания 7. Какое доменное имя привязано к IP? воспользуйтесь утилитой `dig`
+#### Ответ:
+```
+user@Daemon:~$ for ip in `dig +short A dns.google`; do dig -x $ip | grep ^[0-9].*in-addr; done
+8.8.8.8.in-addr.arpa.	2963	IN	PTR	dns.google.
+4.4.8.8.in-addr.arpa.	3548	IN	PTR	dns.google.
+```
+dns.google
 
 
 
