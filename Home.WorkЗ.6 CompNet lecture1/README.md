@@ -56,6 +56,29 @@ Connection closed by foreign host.
 
 Страница загрузилась за 2.45с, самый долгий запрос - stackoverflow.com, 643мс, а также несколько script за 200 мс.
 ![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Home.Work%D0%97.6%20CompNet%20lecture1/stackoverflow3-3.jpg)
+#### 3. Какой IP адрес у вас в интернете?
+#### Ответ:
+``
+user@Daemon:~$ dig @resolver4.opendns.com myip.opendns.com +short
+89.109.50.246
+``
+#### 4. Какому провайдеру принадлежит ваш IP адрес? Какой автономной системе AS? Воспользуйтесь утилитой `whois`
+#### Ответ:
+``
+user@Daemon:~$ whois 89.109.50.246 | grep ^descr
+descr:          Network for PPPoE clients terminations in
+descr:          N.Novgorod city
+descr:          Rostelecom networks
+descr:          NMTS Autonomous System
+``
+Адрес пренадлежит оператору "Ростелеком"
+``
+user@Daemon:~$ whois 89.109.50.246 | grep ^origin
+origin:         AS12389
+origin:         AS25405
+`` 
+Номер AS: AS12389; AS25405
+
 
 
 
