@@ -48,6 +48,8 @@ Connection closed by foreign host.
 - приложите скриншот консоли браузера в ответ.
 #### Ответ:
 - укажите в ответе полученный HTTP код.
+
 301, редирект
-![изображение](
+![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Home.Work%D0%97.6%20CompNet%20lecture1/stackoverflow2-2.jpg)
+
 
