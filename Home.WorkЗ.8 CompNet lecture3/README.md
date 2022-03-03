@@ -95,6 +95,7 @@ ESTAB          0              0                        192.168.0.110%enp3s0:68  
 68 порт использует DHCP для отправки сообщений клиентам.
 #### 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали.
 #### Ответ:
-![изображение](
+![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Home.Work%D0%97.8%20CompNet%20lecture3/Untitled%20Diagram.jpg)
+
 
 
