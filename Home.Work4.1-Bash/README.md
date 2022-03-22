@@ -32,7 +32,7 @@ do
 	fi
 done
 ```
-В скрипте пропущена скобка в конструкции ((1=1)) и ещё нужно добавить "else break", когда сервис поднимется.
+В скрипте пропущена скобка, в конструкции ((1=1)) и ещё нужно добавить "else break", когда сервис поднимется.
 
 ### Ваш скрипт:
 ```bash
@@ -53,7 +53,16 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+declare -i check=1
+while (($check<=5))
+do
+    for host in 192.168.0.1 173.194.222.113 87.250.250.242; do 
+        nc -zw1 $host 80
+        echo $? $host `date` >> test.log
+    done
+check+=1
+sleep 1
+done
 ```
 
 ## Обязательная задача 4
@@ -61,5 +70,19 @@ done
 
 ### Ваш скрипт:
 ```bash
-???
+declare -i check=1
+while (($check==1))
+do
+    for host in 192.168.0.1 173.194.222.113 87.250.250.242; do 
+        nc -zw1 $host 80
+        if (($?==0))
+        then 
+            echo $? $host `date` >> test.log
+        else 
+            echo $host >> error.log 
+            check=0 
+        fi
+    done
+sleep 1
+done
 ```
