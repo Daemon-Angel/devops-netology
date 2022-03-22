@@ -351,5 +351,17 @@ Nmap done: 1 IP address (1 host up) scanned in 207.54 seconds
 ```
 #### 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу.
 #### Ответ:
+```
+vagrant@VM1:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/vagrant/.ssh/id_rsa):
+....
+vagrant@VM1:~$ ssh-copy-id -i .ssh/id_rsa vagrant@192.168.0.110
+....
+vagrant@VM1:~$ ssh vagrant@192.168.0.110
+Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.13.0-35-generic x86_64)
+....
+vagrant@VM2:~$
+```
 
 
