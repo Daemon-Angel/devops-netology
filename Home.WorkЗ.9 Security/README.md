@@ -363,5 +363,22 @@ Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.13.0-35-generic x86_64)
 ....
 vagrant@VM2:~$
 ```
+#### 6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.
+#### Ответ:
+```
+vagrant@VM1:~$ sudo mv ~/.ssh/id_rsa ~/.ssh/id_rsa_netology
+vagrant@VM1:~$ sudo vi ~/.ssh/config
+Host VM2
+        HostName 192.168.0.110
+        User vagrant
+        Port 22
+        IdentityFile ~/.ssh/id_rsa_netology
+vagrant@VM1:~$ ssh VM2
+Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.13.0-35-generic x86_64)
+....
+vagrant@VM2:~$
+```
+#### 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
+#### Ответ:
 
 
