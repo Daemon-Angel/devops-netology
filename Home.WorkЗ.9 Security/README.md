@@ -388,6 +388,6 @@ tcpdump: listening on any, link-type LINUX_SLL (Linux cooked v1), capture size 2
 0 packets dropped by kernel
 
 ```
-
+![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Home.Work%D0%97.9%20Security/100.png)
 
 
