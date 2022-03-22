@@ -380,5 +380,13 @@ vagrant@VM2:~$
 ```
 #### 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
 #### Ответ:
+```
+root@Daemon:/home/user# tcpdump -nnei any -c 100 -w node4-100packets.pcap
+tcpdump: listening on any, link-type LINUX_SLL (Linux cooked v1), capture size 262144 bytes
+100 packets captured
+399 packets received by filter
+0 packets dropped by kernel
+```
+
 
 
