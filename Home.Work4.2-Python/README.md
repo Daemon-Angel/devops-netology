@@ -11,6 +11,7 @@ c = a + b
 ```
 
     Какое значение будет присвоено переменной c?
+#### Ответ:
     
 user@Daemon:~/MY-APP-VSCODE$ /bin/python3 /home/user/MY-APP-VSCODE/1home.py
 Traceback (most recent call last):
@@ -22,6 +23,7 @@ c = a + b
 TypeError: unsupported operand type(s) for +: 'int' and 'str' - ошибка операции сложения, т.к. складываются разные типы данных: число и строка.
     
     Как получить для переменной c значение 12?
+#### Ответ:    
 ```  
 #!/usr/bin/env python3
 a = '1'
@@ -33,6 +35,7 @@ user@Daemon:~/MY-APP-VSCODE$ /bin/python3 /home/user/MY-APP-VSCODE/1home.py
 12
 
     Как получить для переменной c значение 3?
+#### Ответ:    
 ```  
 #!/usr/bin/env python3
 a = 1
@@ -58,3 +61,4 @@ for result in result_os.split('\n'):
         print(prepare_result)
         break
 ```
+#### Ответ:    
