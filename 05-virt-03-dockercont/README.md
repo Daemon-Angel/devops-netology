@@ -39,6 +39,22 @@ b9ed43dcc388: Pull complete
 Digest: sha256:db345982a2f2a4257c6f699a499feb1d79451a1305e8022f16456ddc3ad6b94c
 Status: Downloaded newer image for nginx:latest
 docker.io/library/nginx:latest
+user@Daemon:~$ sudo mkdir -p /home/webuser/myproject/www
+user@Daemon:~$ sudo mkdir -p /home/webuser/myproject/nginx_logs
+user@Daemon:~$ sudo echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
+bash: /home/webuser/myproject/www/index.html: Отказано в доступе
+user@Daemon:~$ echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
+bash: /home/webuser/myproject/www/index.html: Отказано в доступе
+user@Daemon:~$ sudo su echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
+bash: /home/webuser/myproject/www/index.html: Отказано в доступе
+user@Daemon:~$ sudo su
+root@Daemon:/home/user# echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
+root@Daemon:/home/user# docker run --name nginx_myproject -p 8080:80 -v /home/webuser/myproject/www:/usr/share/nginx/html -v /home/webuser/myproject/nginx_logs:/var/log/nginx -d nginx
+4b7c4ea492d2c3756ac80b4b93b8f67e88c35739cdd5efb8aefd7c2b3bbe5b9a
+root@Daemon:/home/user# docker ps
+CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS                    PORTS                                   NAMES
+4b7c4ea492d2   nginx                            "/docker-entrypoint.…"   19 seconds ago   Up 18 seconds             0.0.0.0:8080->80/tcp, :::8080->80/tcp   nginx_myproject
+
 
 
 
