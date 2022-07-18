@@ -41,12 +41,6 @@ Status: Downloaded newer image for nginx:latest
 docker.io/library/nginx:latest
 user@Daemon:~$ sudo mkdir -p /home/webuser/myproject/www
 user@Daemon:~$ sudo mkdir -p /home/webuser/myproject/nginx_logs
-user@Daemon:~$ sudo echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
-bash: /home/webuser/myproject/www/index.html: Отказано в доступе
-user@Daemon:~$ echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
-bash: /home/webuser/myproject/www/index.html: Отказано в доступе
-user@Daemon:~$ sudo su echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
-bash: /home/webuser/myproject/www/index.html: Отказано в доступе
 user@Daemon:~$ sudo su
 root@Daemon:/home/user# echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
 root@Daemon:/home/user# docker run --name nginx_myproject -p 8080:80 -v /home/webuser/myproject/www:/usr/share/nginx/html -v /home/webuser/myproject/nginx_logs:/var/log/nginx -d nginx
