@@ -17,7 +17,7 @@ Hey, Netology
 </body>
 </html>
 ```
-
+   - Опубликуйте созданный форк в своем репозитории и предоставьте ответ в виде ссылки на https://hub.docker.com/username_repo.
 ### Ответ:
 ```
 user@Daemon:~$ sudo docker login
@@ -70,4 +70,9 @@ c03189a5ef70: Pushed
 1c99a7efe9d9: Pushed 
 43b3c4e3001c: Pushed 
 latest: digest: sha256:d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc512e0b4 size: 1777
+```
+https://hub.docker.com/layers/daemonangel/netology1/latest/images/sha256-d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc512e0b4?context=explore
+
+
+
 
