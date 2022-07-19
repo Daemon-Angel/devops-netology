@@ -73,6 +73,6 @@ latest: digest: sha256:d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc
 ```
 https://hub.docker.com/layers/daemonangel/netology1/latest/images/sha256-d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc512e0b4?context=explore
 
-
+![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/Hom.png)
 
 
