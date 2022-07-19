@@ -54,6 +54,20 @@ user@Daemon:~$ sudo docker images
 REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
 netology                  latest    3adb01ded8a2   35 seconds ago   142MB
 nginx                     latest    41b0e86104ba   6 days ago       142MB
-
-
+user@Daemon:~$ sudo docker tag netology daemonangel/netology1
+user@Daemon:~$ sudo docker images
+REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+daemonangel/netology1     latest    3adb01ded8a2   11 minutes ago   142MB
+netology                  latest    3adb01ded8a2   11 minutes ago   142MB
+user@Daemon:~$ sudo docker push daemonangel/netology1
+Using default tag: latest
+The push refers to repository [docker.io/daemonangel/netology1]
+e84d35a9094a: Pushed 
+de100bd247e0: Pushed 
+1d561d938628: Pushed 
+c03189a5ef70: Pushed 
+305b0db3a210: Pushed 
+1c99a7efe9d9: Pushed 
+43b3c4e3001c: Pushed 
+latest: digest: sha256:d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc512e0b4 size: 1777
 
