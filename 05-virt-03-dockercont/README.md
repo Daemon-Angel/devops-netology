@@ -48,7 +48,12 @@ root@Daemon:/home/user# docker run --name nginx_myproject -p 8080:80 -v /home/we
 root@Daemon:/home/user# docker ps
 CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS                    PORTS                                   NAMES
 4b7c4ea492d2   nginx                            "/docker-entrypoint.…"   19 seconds ago   Up 18 seconds             0.0.0.0:8080->80/tcp, :::8080->80/tcp   nginx_myproject
-
+user@Daemon:~$ sudo docker commit nginx_myproject netology
+sha256:3adb01ded8a2d3c08b8a8f5b5d21321fe1f251cfcf0e67fe351019152ba11934
+user@Daemon:~$ sudo docker images
+REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+netology                  latest    3adb01ded8a2   35 seconds ago   142MB
+nginx                     latest    41b0e86104ba   6 days ago       142MB
 
 
 
