@@ -75,5 +75,18 @@ https://hub.docker.com/layers/daemonangel/netology1/latest/images/sha256-d6fb58c
 
 ![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/05-virt-03-dockercont/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202022-07-19%2003-22-45.png)
 
+### Работа над ошибками 1 задание:
 
+user@Daemon:~$ docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+1efc276f4ff9: Pull complete 
+baf2da91597d: Pull complete 
+05396a986fd3: Pull complete 
+6a17c8e7063d: Pull complete 
+27e0d286aeab: Pull complete 
+b1349eea8fc5: Pull complete 
+Digest: sha256:790711e34858c9b0741edffef6ed3d8199d8faa33f2870dea5db70f16384df79
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
 
