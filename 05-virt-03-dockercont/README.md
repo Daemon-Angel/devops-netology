@@ -27,66 +27,41 @@ Configure a credential helper to remove this warning. See
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Login Succeeded
-user@Daemon:~$ sudo docker pull nginx
-Using default tag: latest
-latest: Pulling from library/nginx
-461246efe0a7: Pull complete 
-a96aaf9a9ec3: Pull complete 
-650d8b758441: Pull complete 
-b138da793ac8: Pull complete 
-bb1705539683: Pull complete 
-b9ed43dcc388: Pull complete 
-Digest: sha256:db345982a2f2a4257c6f699a499feb1d79451a1305e8022f16456ddc3ad6b94c
-Status: Downloaded newer image for nginx:latest
-docker.io/library/nginx:latest
-user@Daemon:~$ sudo mkdir -p /home/webuser/myproject/www
-user@Daemon:~$ sudo mkdir -p /home/webuser/myproject/nginx_logs
-user@Daemon:~$ sudo su
-root@Daemon:/home/user# echo '<html><head>Hey, Netology<head><body><h1>I`m DevOps Engineer!</h1></body></html>' > /home/webuser/myproject/www/index.html
-root@Daemon:/home/user# docker run --name nginx_myproject -p 8080:80 -v /home/webuser/myproject/www:/usr/share/nginx/html -v /home/webuser/myproject/nginx_logs:/var/log/nginx -d nginx
-4b7c4ea492d2c3756ac80b4b93b8f67e88c35739cdd5efb8aefd7c2b3bbe5b9a
-root@Daemon:/home/user# docker ps
+user@Daemon:~$ mkdir html
+user@Daemon:~$ cd html
+user@Daemon:~/html$ touch index.html
+user@Daemon:~/html$ touch Dockerfile
+user@Daemon:~/html$ code .
+# Далее в Visual Studio Code внес необходимую нам информацию в файл index.html и в 
+Dockerfile : FROM nginx:alpine
+             COPY . /usr/share/nginx/html/test
+user@Daemon:~/html$ docker build -t html .
+Sending build context to Docker daemon  3.072kB
+Step 1/2 : FROM nginx:alpine
+alpine: Pulling from library/nginx
+213ec9aee27d: Pull complete 
+2546ae67167b: Pull complete 
+23b845224e13: Pull complete 
+9bd5732789a3: Pull complete 
+328309e59ded: Pull complete 
+b231d02e5150: Pull complete 
+Digest: sha256:082f8c10bd47b6acc8ef15ae61ae45dd8fde0e9f389a8b5cb23c37408642bf5d
+Status: Downloaded newer image for nginx:alpine
+ ---> 804f9cebfdc5
+Step 2/2 : COPY . /usr/share/nginx/html/test
+ ---> 7fde872a375b
+Successfully built 7fde872a375b
+Successfully tagged html:latest
+user@Daemon:~/html$ docker images
+REPOSITORY                TAG       IMAGE ID       CREATED              SIZE
+html                      latest    7fde872a375b   About a minute ago   23.5MB
+user@Daemon:~/html$ docker run -p 8080:80 -d html
+6c41a5bae7d6f28704f6c1865e348b019c16f7f2a4b2ddc867465ac0016ad351
+user@Daemon:~/html$ docker ps
 CONTAINER ID   IMAGE                            COMMAND                  CREATED          STATUS                    PORTS                                   NAMES
-4b7c4ea492d2   nginx                            "/docker-entrypoint.…"   19 seconds ago   Up 18 seconds             0.0.0.0:8080->80/tcp, :::8080->80/tcp   nginx_myproject
-user@Daemon:~$ sudo docker commit nginx_myproject netology
-sha256:3adb01ded8a2d3c08b8a8f5b5d21321fe1f251cfcf0e67fe351019152ba11934
-user@Daemon:~$ sudo docker images
+6c41a5bae7d6   html                             "/docker-entrypoint.…"   21 seconds ago   Up 20 seconds             0.0.0.0:8080->80/tcp, :::8080->80/tcp   unruffled_taussig
+user@Daemon:~/html$ docker commit unruffled_taussig netology2
+sha256:303825fb32af2108375bd63b187474ce6d05e04c1e5175652d9cd8baa95a56b6
+user@Daemon:~/html$ docker images
 REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
-netology                  latest    3adb01ded8a2   35 seconds ago   142MB
-nginx                     latest    41b0e86104ba   6 days ago       142MB
-user@Daemon:~$ sudo docker tag netology daemonangel/netology1
-user@Daemon:~$ sudo docker images
-REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
-daemonangel/netology1     latest    3adb01ded8a2   11 minutes ago   142MB
-netology                  latest    3adb01ded8a2   11 minutes ago   142MB
-user@Daemon:~$ sudo docker push daemonangel/netology1
-Using default tag: latest
-The push refers to repository [docker.io/daemonangel/netology1]
-e84d35a9094a: Pushed 
-de100bd247e0: Pushed 
-1d561d938628: Pushed 
-c03189a5ef70: Pushed 
-305b0db3a210: Pushed 
-1c99a7efe9d9: Pushed 
-43b3c4e3001c: Pushed 
-latest: digest: sha256:d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc512e0b4 size: 1777
-```
-https://hub.docker.com/layers/daemonangel/netology1/latest/images/sha256-d6fb58cab6e18742bc283a481d5ff86e1a70735073cfe45420cc8c2dc512e0b4?context=explore
-
-![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/05-virt-03-dockercont/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202022-07-19%2003-22-45.png)
-
-### Работа над ошибками 1 задание:
-
-user@Daemon:~$ docker pull nginx
-Using default tag: latest
-latest: Pulling from library/nginx
-1efc276f4ff9: Pull complete 
-baf2da91597d: Pull complete 
-05396a986fd3: Pull complete 
-6a17c8e7063d: Pull complete 
-27e0d286aeab: Pull complete 
-b1349eea8fc5: Pull complete 
-Digest: sha256:790711e34858c9b0741edffef6ed3d8199d8faa33f2870dea5db70f16384df79
-Status: Downloaded newer image for nginx:latest
-docker.io/library/nginx:latest
-
+netology2                 latest    303825fb32af   11 seconds ago   23.5MB
