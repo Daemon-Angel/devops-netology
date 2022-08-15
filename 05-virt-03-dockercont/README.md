@@ -84,6 +84,6 @@ a1d571e4e83d: Pushed
 latest: digest: sha256:012d2a48fa37cccd578c908fbe5035a63315b2b0bdffd79435ed1bee772a1946 size: 1982
 ```
 https://hub.docker.com/r/daemonangel/netology2
-![изображение](
+![изображение](https://github.com/Daemon-Angel/devops-netology/blob/main/05-virt-03-dockercont/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%20%D0%BE%D1%82%202022-08-16%2001-36-09.png)
 
 
