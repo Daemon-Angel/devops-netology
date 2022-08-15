@@ -65,3 +65,23 @@ sha256:303825fb32af2108375bd63b187474ce6d05e04c1e5175652d9cd8baa95a56b6
 user@Daemon:~/html$ docker images
 REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
 netology2                 latest    303825fb32af   11 seconds ago   23.5MB
+user@Daemon:~/html$ docker tag netology2 daemonangel/netology2
+user@Daemon:~/html$ docker images
+REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
+netology2                 latest    303825fb32af   6 minutes ago    23.5MB
+daemonangel/netology2     latest    303825fb32af   6 minutes ago    23.5MB
+user@Daemon:~/html$ docker push daemonangel/netology2
+Using default tag: latest
+The push refers to repository [docker.io/daemonangel/netology2]
+b3f3d5e6c8fa: Pushed 
+e308c8163f11: Pushed 
+bf4e176a4d9b: Pushed 
+a1d571e4e83d: Pushed 
+6d97b4d00719: Pushed 
+2a7647ca3937: Pushed 
+549c42eea4a6: Pushed 
+994393dc58e7: Pushed 
+latest: digest: sha256:012d2a48fa37cccd578c908fbe5035a63315b2b0bdffd79435ed1bee772a1946 size: 1982
+https://hub.docker.com/repository/docker/daemonangel/netology2
+
+
