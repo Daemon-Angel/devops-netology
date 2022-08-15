@@ -84,6 +84,6 @@ a1d571e4e83d: Pushed
 latest: digest: sha256:012d2a48fa37cccd578c908fbe5035a63315b2b0bdffd79435ed1bee772a1946 size: 1982
 ```
 https://hub.docker.com/r/daemonangel/netology2
-
+![изображение](
 
 
