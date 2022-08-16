@@ -139,4 +139,43 @@ Docker подойдёт для этой задачи хорошо. Развор�
     Подключитесь к первому контейнеру с помощью docker exec и создайте текстовый файл любого содержания в /data;
     Добавьте еще один файл в папку /data на хостовой машине;
     Подключитесь во второй контейнер и отобразите листинг и содержание файлов в /data контейнера.
+    
+### Ответ:
+Запуск контейнеров:
+```
+user@Daemon:~$ docker run -it --rm -d --name centos -v $(pwd)/data:/data centos:latest
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+a1d0c7532777: Pull complete 
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image for centos:latest
+ad3b81cad13feec7663ed0d7b47f4dcec495c60566a17c72cd74a40a50ef7655
+user@Daemon:~$ docker run -it --rm -d --name debian -v $(pwd)/data:/data debian:stable
+Unable to find image 'debian:stable' locally
+stable: Pulling from library/debian
+464fd0c84e4d: Pull complete 
+Digest: sha256:b9b1f4a7df16fcf7f287802d827b80f481a1e4caecb62c40c2e26fdebdc2eab9
+Status: Downloaded newer image for debian:stable
+0de0694c9a90ee1e928e95d5d84de0a818ecd27e1ad625f4e51dea15e6d2ec29
+```
+Файл из контейнера с CentOS:
+```
+user@Daemon:~$ docker exec -it centos bash
+[root@ad3b81cad13f /]# echo "Hi Netology! This is CentOS!" > /data/centos.txt
+[root@ad3b81cad13f /]# exit
+exit
+```
+Файл с хоста:
+```
+root@Daemon:/home/user# echo "Hi Netology! This is Host!" > data/host.txt
+```
+Файлы в директории /data в контейнере с Debian:
+```
+user@Daemon:~$ docker exec -it debian bash
+root@0de0694c9a90:/# ls -l /data/
+total 20
+-rw-r--r-- 1 root root    29 Aug 16 19:22 centos.txt
+-rw-r--r-- 1 root root    27 Aug 16 19:25 host.txt
+```
+
 
